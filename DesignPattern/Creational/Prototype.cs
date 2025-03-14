@@ -1,26 +1,5 @@
 ﻿using System;
 
-public class Nguoi
-{
-    public int Tuoi;
-    public DateTime NgaySinh;
-    public string Ten;
-    public ThongTinID ThongTinID;
-
-    public Nguoi SaoChepNong()
-    {
-        return (Nguoi)this.MemberwiseClone();
-    }
-
-    public Nguoi SaoChepSau()
-    {
-        Nguoi banSao = (Nguoi)this.MemberwiseClone();
-        banSao.ThongTinID = new ThongTinID(ThongTinID.MaSo);
-        banSao.Ten = String.Copy(Ten);
-        return banSao;
-    }
-}
-
 public class ThongTinID
 {
     public int MaSo;
@@ -28,6 +7,26 @@ public class ThongTinID
     public ThongTinID(int maSo)
     {
         this.MaSo = maSo;
+    }
+}
+public class Nguoi
+{
+    public int Tuoi;
+    public DateTime NgaySinh;
+    public string Ten;
+    public ThongTinID ThongTinID;
+
+    public Nguoi ShallowCopy()
+    {
+        return (Nguoi)this.MemberwiseClone();
+    }
+
+    public Nguoi DeepCopy()
+    {
+        Nguoi banSao = (Nguoi)this.MemberwiseClone();
+        banSao.ThongTinID = new ThongTinID(ThongTinID.MaSo);
+        banSao.Ten = String.Copy(Ten);
+        return banSao;
     }
 }
 

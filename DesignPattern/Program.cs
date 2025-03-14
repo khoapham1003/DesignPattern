@@ -29,8 +29,9 @@ namespace DesignPatterns
             TypeCPhone androidNew = new TypeCPhone(usbCCharger);
             androidNew.ChargePhone();
             #endregion
+            */
             
-
+            /*
             #region Builder
 
             var quanLy = new QuanLyBuaAn();
@@ -61,16 +62,22 @@ namespace DesignPatterns
 
             */
 
-            /*
+            
             #region Composite
-            KhachHang khachHang = new KhachHang();
+            KhachHangComposite client = new KhachHangComposite();
 
-            // Thành phần lá
+            //Tạo 1 thành phần  - 1 lá
             La la = new La();
-            Console.WriteLine("Khách hàng: Tôi có một thành phần đơn lẻ:");
-            khachHang.XuLy(la);
 
-            // Thành phần hợp thành
+
+            Console.WriteLine("Khách hàng: Tôi có một thành phần đơn lẻ:");
+            client.XuLy(la);
+
+
+
+            //Tạo 1 Thành phần hợp thành - 1 cây(1 hợp thành) chứa 2 nhánh,
+            //                   Trong đó: 1 nhánh(1 hợp thành) chứa 2 lá
+            //                          và 1 nhánh(1 hợp thành) chứa 1 lá
             HopThanh cay = new HopThanh();
             HopThanh nhanh1 = new HopThanh();
             nhanh1.Them(new La());
@@ -80,15 +87,19 @@ namespace DesignPatterns
             cay.Them(nhanh1);
             cay.Them(nhanh2);
 
-            Console.WriteLine("Khách hàng: Bây giờ tôi có một cây hợp thành:");
-            khachHang.XuLy(cay);
 
-            Console.WriteLine("Khách hàng: Tôi có thể quản lý cây mà không cần kiểm tra từng thành phần:");
-            khachHang.XuLyCay(cay, la);
+            // Khách hàng chỉ giao tiêp với Thành phần thông qua Client
+            Console.WriteLine("Khách hàng: Bây giờ tôi có một cây hợp thành:");
+            client.XuLy(cay);
+
+            Console.WriteLine("Khách hàng: Tôi có thể quản lý cây mà không cần " +
+                "kiểm tra từng thành phần là lá hay cây hay nhánh:");
+            client.XuLyCay(cay, la);
 
             #endregion
-            */
+            
 
+            /*
             #region Prototype
             Nguoi nguoi1 = new Nguoi();
             nguoi1.Tuoi = 42;
@@ -97,9 +108,9 @@ namespace DesignPatterns
             nguoi1.ThongTinID = new ThongTinID(1234);
 
             // Thực hiện sao chép nông
-            Nguoi nguoi2 = nguoi1.SaoChepNong();
+            Nguoi nguoi2 = nguoi1.ShallowCopy();
             // Thực hiện sao chép sâu
-            Nguoi nguoi3 = nguoi1.SaoChepSau();
+            Nguoi nguoi3 = nguoi1.DeepCopy();
 
             // Hiển thị giá trị ban đầu
             Console.WriteLine("Giá trị ban đầu của nguoi1, nguoi2, nguoi3:");
@@ -119,12 +130,12 @@ namespace DesignPatterns
             Console.WriteLine("\nGiá trị sau khi thay đổi nguoi1:");
             Console.WriteLine("   nguoi1:");
             HienThiThongTin.HienThiThongTinNguoiDung(nguoi1);
-            Console.WriteLine("   nguoi2 (bị ảnh hưởng do sao chép nông):");
+            Console.WriteLine("   nguoi2 (bị ảnh hưởng do shallow copy):");
             HienThiThongTin.HienThiThongTinNguoiDung(nguoi2);
-            Console.WriteLine("   nguoi3 (không bị ảnh hưởng do sao chép sâu):");
+            Console.WriteLine("   nguoi3 (không bị ảnh hưởng do deep copy):");
             HienThiThongTin.HienThiThongTinNguoiDung(nguoi3);
             #endregion
-
+            */
         }
     }
 }

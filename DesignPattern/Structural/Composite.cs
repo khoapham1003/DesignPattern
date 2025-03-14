@@ -1,32 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// Lớp thành phần cơ sở
+// Component
 abstract class ThanhPhan
 {
-    public abstract string ThucHien();
+    public abstract string Execute();
     public virtual void Them(ThanhPhan tp) { throw new NotImplementedException(); }
     public virtual void Xoa(ThanhPhan tp) { throw new NotImplementedException(); }
-    public virtual bool LaHopThanh() { return true; }
+    public virtual bool IsHopThanh() { return true; }
 }
 
-// Thành phần lá (đơn lẻ)
+// Leaf - Thành phần là 1 Leaf
 class La : ThanhPhan
 {
-    public override string ThucHien()
+    public override string Execute()
     {
         return "Lá";
     }
-    public override bool LaHopThanh()
+    public override bool IsHopThanh()
     {
         return false;
     }
 }
 
-// Thành phần hợp thành (có thể chứa thành phần khác)
+// Composite - Thành phần chứa nhiều Leaf/Thành phần khác
 class HopThanh : ThanhPhan
 {
     private List<ThanhPhan> thanhPhans = new List<ThanhPhan>();
+
+    public override string Execute()
+    {
+        string ketQua = "Nhánh(";
+        for (int i = 0; i < thanhPhans.Count; i++)
+        {
+            ketQua += thanhPhans[i].Execute();
+            if (i < thanhPhans.Count - 1)
+            {
+                ketQua += "+";
+            }
+        }
+        return ketQua + ")";
+    }
 
     public override void Them(ThanhPhan tp)
     {
@@ -37,35 +51,32 @@ class HopThanh : ThanhPhan
     {
         thanhPhans.Remove(tp);
     }
-
-    public override string ThucHien()
-    {
-        string ketQua = "Nhánh(";
-        for (int i = 0; i < thanhPhans.Count; i++)
-        {
-            ketQua += thanhPhans[i].ThucHien();
-            if (i < thanhPhans.Count - 1)
-            {
-                ketQua += "+";
-            }
-        }
-        return ketQua + ")";
-    }
 }
 
-// Lớp khách hàng
-class KhachHang
+// Lớp khách hàng Client
+class KhachHangComposite
 {
     public void XuLy(ThanhPhan tp)
     {
-        Console.WriteLine($"KẾT QUẢ: {tp.ThucHien()}\n");
+        //Đưa ra trạng thái của tp hiện tại
+        Console.WriteLine($"KẾT QUẢ: {tp.Execute()}\n");
     }
     public void XuLyCay(ThanhPhan tp1, ThanhPhan tp2)
     {
-        if (tp1.LaHopThanh())
+        if (tp1.IsHopThanh())
         {
             tp1.Them(tp2);
+            Console.WriteLine($"KẾT QUẢ: {tp1.Execute()}");
         }
-        Console.WriteLine($"KẾT QUẢ: {tp1.ThucHien()}");
+        else if (tp2.IsHopThanh())
+        {
+            tp2.Them(tp1);
+            Console.WriteLine($"KẾT QUẢ: {tp2.Execute()}");
+        }
+        else
+        {
+            Console.WriteLine("LỖI: Không thể thêm thành phần vào một Lá!");
+        }
+
     }
 }
