@@ -1,5 +1,4 @@
-﻿using DecoratorPatternVietnam;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -264,10 +263,30 @@ namespace DesignPatterns
                                 break;
                             case 5:
                                 #region Facade
+                                BookingFacade bookingFacade = new BookingFacade();
+                                bookingFacade.BookTicket("Hà Nội", "TP. Hồ Chí Minh", DateTime.Now.AddDays(7), "0909-0909-0909-0909", "customer@email.com");
                                 #endregion
                                 break;
                             case 6:
                                 #region Flyweight
+                                FlyweightFactory factory = new FlyweightFactory();
+
+                                Context context1 = new Context(factory, "SUV", "Toyota", "Màu Đỏ_Biển Số 123XYZ");
+                                Context context2 = new Context(factory, "SUV", "Toyota", "Màu Xanh_Biển Số 456ABC");
+                                Context context3 = new Context(factory, "Sedan", "Honda", "Màu Đen_Biển Số 101GHI");
+                                Context context4 = new Context(factory, "SUV", "Ford", "Màu Đỏ_Biển Số 555JKL");
+                                Context context5 = new Context(factory, "Sedan", "Toyota", "Màu Xám_Biển Số 999PQR");
+
+                                Console.WriteLine("\n=== Hiển thị các Context ===");
+                                context1.Operation();
+                                context2.Operation();
+                                context3.Operation();
+                                context4.Operation();
+                                context5.Operation();
+
+                                factory.ListFlyweights();
+                                Console.ReadLine();
+
                                 #endregion
                                 break;
                             case 7:
@@ -285,34 +304,35 @@ goto LoopPattern;
                             case 0:
                                 goto LoopGroup;
                             case 1:
-                                #region Adapter
+                                #region 
 
                                 #endregion
                                 break;
                             case 2:
-                                #region Composite
+                                #region 
                          
 
                                 #endregion
                                 break;
                             case 3:
-                                #region Decorator
+                                #region 
                                 #endregion
                                 break;
                             case 4:
-                                #region Prototype
+                                #region 
                                 #endregion
                                 break;
                             case 5:
-                                #region Facade
+                                #region 
                                 #endregion
                                 break;
                             case 6:
-                                #region Flyweight
+                                #region 
+
                                 #endregion
                                 break;
                             case 7:
-                                #region Proxy
+                                #region 
                                 #endregion
                                 break;
                             default:
@@ -323,7 +343,7 @@ goto LoopPattern;
                     default:
                         break;
                 }
-                Console.WriteLine();
+                Console.WriteLine(".");
                 if(Console.ReadLine()==" ") goto Begin;
             }
             catch (Exception ex)

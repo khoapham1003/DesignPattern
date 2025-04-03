@@ -1,7 +1,5 @@
 ﻿using System;
 
-namespace DecoratorPatternVietnam
-{
     // Component: Định nghĩa interface chung cho đồ uống
     public abstract class ThucUong
     {
@@ -80,4 +78,3 @@ namespace DecoratorPatternVietnam
             Console.WriteLine($"Món: {thucUong.MoTa()} - Giá: {thucUong.Gia()} VNĐ");
         }
     }
-}
