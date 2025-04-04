@@ -46,13 +46,13 @@ namespace DesignPatterns
                         break;
                     case 3:
                         #region Behavioral Pattern
-                        Console.WriteLine("\n\t1.Chain of Responsibility");
+                        Console.WriteLine("\n\t1.State");
                         Console.WriteLine("\t2.Command");
                         Console.WriteLine("\t3.Iterator");
                         Console.WriteLine("\t4.Mediator");
                         Console.WriteLine("\t5.Memento");
                         Console.WriteLine("\t6.Observer");
-                        Console.WriteLine("\t7.State");
+                        Console.WriteLine("\t7.Chain of Responsibility");
                         Console.WriteLine("\t8.Strategy");
                         Console.WriteLine("\t9.Template Method");
                         Console.WriteLine("\t10.Visiter");
@@ -271,11 +271,11 @@ namespace DesignPatterns
                                 #region Flyweight
                                 FlyweightFactory factory = new FlyweightFactory();
 
-                                Context context1 = new Context(factory, "SUV", "Toyota", "Màu Đỏ_Biển Số 123XYZ");
-                                Context context2 = new Context(factory, "SUV", "Toyota", "Màu Xanh_Biển Số 456ABC");
-                                Context context3 = new Context(factory, "Sedan", "Honda", "Màu Đen_Biển Số 101GHI");
-                                Context context4 = new Context(factory, "SUV", "Ford", "Màu Đỏ_Biển Số 555JKL");
-                                Context context5 = new Context(factory, "Sedan", "Toyota", "Màu Xám_Biển Số 999PQR");
+                                ContextDPFlyweight context1 = new ContextDPFlyweight(factory, "SUV", "Toyota", "Màu Đỏ_Biển Số 123XYZ");
+                                ContextDPFlyweight context2 = new ContextDPFlyweight(factory, "SUV", "Toyota", "Màu Xanh_Biển Số 456ABC");
+                                ContextDPFlyweight context3 = new ContextDPFlyweight(factory, "Sedan", "Honda", "Màu Đen_Biển Số 101GHI");
+                                ContextDPFlyweight context4 = new ContextDPFlyweight(factory, "SUV", "Ford", "Màu Đỏ_Biển Số 555JKL");
+                                ContextDPFlyweight context5 = new ContextDPFlyweight(factory, "Sedan", "Toyota", "Màu Xám_Biển Số 999PQR");
 
                                 Console.WriteLine("\n=== Hiển thị các Context ===");
                                 context1.Operation();
@@ -291,6 +291,22 @@ namespace DesignPatterns
                                 break;
                             case 7:
                                 #region Proxy
+
+                                DocumentProxy proxy = new DocumentProxy("Đây là nội dung tài liệu bảo mật.");
+
+                                ClientDPProxy client1 = new ClientDPProxy(proxy);
+                                client1.RequestView("admin"); 
+
+                                ClientDPProxy client2 = new ClientDPProxy(proxy);
+                                client2.RequestView("guest"); 
+
+                                client1.RequestView("admin"); 
+
+                                ClientDPProxy client3 = new ClientDPProxy(proxy);
+                                client3.RequestView("manager");
+                                client3.RequestView("manager"); 
+                                client3.RequestView("manager");
+
                                 #endregion
                                 break;
                             default:
@@ -304,8 +320,45 @@ goto LoopPattern;
                             case 0:
                                 goto LoopGroup;
                             case 1:
-                                #region 
+                                #region State
+                                // Đơn suôn sẻ
+                                Console.WriteLine("Đơn hàng 1:");
+                                var contextOrder1 = new OrderContext(new PendingState());
+                                Console.ReadLine();
+                                contextOrder1.ProcessOrder();
+                                Console.ReadLine();
+                                contextOrder1.ShipOrder();
+                                Console.ReadLine();
+                                contextOrder1.DeliverOrder();
+                                Console.ReadLine();
+                                contextOrder1.CompleteOrder();
+                                Console.ReadLine();
+                                contextOrder1.CancelOrder();
+                                Console.ReadLine();
 
+                                // Đơn bị hủy khi đang process
+                                Console.WriteLine("Đơn hàng 2:");
+                                var contextOrder2 = new OrderContext(new PendingState());
+                                Console.ReadLine();
+                                contextOrder2.ProcessOrder(); 
+                                Console.ReadLine();
+                                contextOrder2.CancelOrder(); 
+                                Console.ReadLine();
+
+                                // Đơn hàng chưa được xử lý nhưng thử giao
+                                Console.WriteLine("Đơn hàng 3:");
+                                var contextOrder3 = new OrderContext(new PendingState());
+                                Console.ReadLine();
+                                contextOrder3.ShipOrder();
+                                Console.ReadLine();
+                                contextOrder3.ProcessOrder();
+                                Console.ReadLine();
+                                contextOrder3.ShipOrder();
+                                Console.ReadLine();
+                                contextOrder3.DeliverOrder();
+                                Console.ReadLine(); 
+                                contextOrder3.CompleteOrder();
+                                Console.ReadLine();
                                 #endregion
                                 break;
                             case 2:

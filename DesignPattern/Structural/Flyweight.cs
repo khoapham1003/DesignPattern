@@ -49,12 +49,12 @@ using System.Collections.Generic;
 
     //Context: Hiển thị của 1 object khi chưa dùng Flyweight
     //Chứa trạng thái duy nhất (uniqueState) và tham chiếu Flyweight
-    public class Context
+    public class ContextDPFlyweight
     {
         private string uniqueState; 
         private Flyweight flyweight;
 
-        public Context(FlyweightFactory factory, string category, string company, string uniqueState)
+        public ContextDPFlyweight(FlyweightFactory factory, string category, string company, string uniqueState)
         {
             string repeatingState = $"{category}_{company}"; 
             this.uniqueState = uniqueState;
