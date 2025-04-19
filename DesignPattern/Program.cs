@@ -12,7 +12,7 @@ namespace DesignPatterns
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Begin:
+        Begin:
             int nhom = 0;
             try
             {
@@ -48,14 +48,14 @@ namespace DesignPatterns
                         #region Behavioral Pattern
                         Console.WriteLine("\n\t1.State");
                         Console.WriteLine("\t2.Command");
-                        Console.WriteLine("\t3.Iterator");
+                        Console.WriteLine("\t3.Visitor");
                         Console.WriteLine("\t4.Mediator");
                         Console.WriteLine("\t5.Memento");
                         Console.WriteLine("\t6.Observer");
                         Console.WriteLine("\t7.Chain of Responsibility");
                         Console.WriteLine("\t8.Strategy");
                         Console.WriteLine("\t9.Template Method");
-                        Console.WriteLine("\t10.Visiter");
+                        Console.WriteLine("\t10.Iterator");
                         #endregion
                         break;
                     default:
@@ -63,7 +63,7 @@ namespace DesignPatterns
                 }
 
                 int loai = 0;
-                LoopPattern: Console.Write("\n--->Choose pattern:");
+            LoopPattern: Console.Write("\n--->Choose pattern:");
                 int.TryParse(Console.ReadLine(), out loai);
                 switch (nhom)
                 {
@@ -75,7 +75,7 @@ namespace DesignPatterns
                                 goto LoopGroup;
                             case 1:
                                 #region Singleton
-                               
+
                                 #endregion
                                 break;
                             case 2:
@@ -85,7 +85,7 @@ namespace DesignPatterns
                                 break;
                             case 3:
                                 #region Abstract Factory
-                             
+
                                 #endregion
                                 break;
                             case 4:
@@ -295,22 +295,22 @@ namespace DesignPatterns
                                 DocumentProxy proxy = new DocumentProxy("Đây là nội dung tài liệu bảo mật.");
 
                                 ClientDPProxy client1 = new ClientDPProxy(proxy);
-                                client1.RequestView("admin"); 
+                                client1.RequestView("admin");
 
                                 ClientDPProxy client2 = new ClientDPProxy(proxy);
-                                client2.RequestView("guest"); 
+                                client2.RequestView("guest");
 
-                                client1.RequestView("admin"); 
+                                client1.RequestView("admin");
 
                                 ClientDPProxy client3 = new ClientDPProxy(proxy);
                                 client3.RequestView("manager");
-                                client3.RequestView("manager"); 
+                                client3.RequestView("manager");
                                 client3.RequestView("manager");
 
                                 #endregion
                                 break;
                             default:
-goto LoopPattern;
+                                goto LoopPattern;
                         }
                         break;
                     //Behavioral
@@ -340,9 +340,9 @@ goto LoopPattern;
                                 Console.WriteLine("Đơn hàng 2:");
                                 var contextOrder2 = new OrderContext(new PendingState());
                                 Console.ReadLine();
-                                contextOrder2.ProcessOrder(); 
+                                contextOrder2.ProcessOrder();
                                 Console.ReadLine();
-                                contextOrder2.CancelOrder(); 
+                                contextOrder2.CancelOrder();
                                 Console.ReadLine();
 
                                 // Đơn hàng chưa được xử lý nhưng thử giao
@@ -356,27 +356,73 @@ goto LoopPattern;
                                 contextOrder3.ShipOrder();
                                 Console.ReadLine();
                                 contextOrder3.DeliverOrder();
-                                Console.ReadLine(); 
+                                Console.ReadLine();
                                 contextOrder3.CompleteOrder();
                                 Console.ReadLine();
                                 #endregion
                                 break;
                             case 2:
-                                #region 
-                         
+                                #region Command
+                                var accK = new Account("Khoa", 1900);
+                                var accT = new Account("Tien", 2000);
 
+                                var bank = new BankSystem();
+                                Console.WriteLine("=== Đăng nhập các kiểu vào tài khoản ===");
+
+                                Console.ReadLine();
+                                var deposit = new DepositCommand(accK, 300);
+                                
+                                bank.SetCommand(deposit);
+                                bank.ExecuteCommand();
+
+                                Console.ReadLine();
+                                var withdrawfail = new WithdrawCommand(accK, 3000);
+                                
+                                bank.SetCommand(withdrawfail);
+                                bank.ExecuteCommand();
+
+                                Console.ReadLine();
+                                var withdrawsuccess = new WithdrawCommand(accK, 1500);
+                                
+                                bank.SetCommand(withdrawsuccess);
+                                bank.ExecuteCommand();
+
+                                Console.ReadLine();
+                                var transfer = new TransferCommand(accK, accT, 300);
+                                
+                                bank.SetCommand(transfer);
+                                bank.ExecuteCommand();
+                                
+                                
+                                
                                 #endregion
                                 break;
                             case 3:
-                                #region 
+                                #region Visitor
+
+                                var danhSachThietBi = new List<IThietBi>
+                                {new MayIn(),new MayFax()};
+                                
+                                Console.ReadLine();
+                                Console.WriteLine("=== KSPC kiểm tra phần cứng ===");
+                                QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new KySuPhanCung());
+
+                                Console.ReadLine();
+                                Console.WriteLine("\n=== KSPM kiểm tra phần mềm ===");
+                                QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new KySuPhanMem());
+
+                                Console.ReadLine();
+                                Console.WriteLine("\n=== NVVP sử dụng ===");
+                                QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new NhanVienVanPhong());
+
                                 #endregion
                                 break;
                             case 4:
-                                #region 
+                                #region Mediator
                                 #endregion
                                 break;
                             case 5:
-                                #region 
+                                #region Memento
                                 #endregion
                                 break;
                             case 6:
@@ -397,7 +443,7 @@ goto LoopPattern;
                         break;
                 }
                 Console.WriteLine(".");
-                if(Console.ReadLine()==" ") goto Begin;
+                if (Console.ReadLine() == " ") goto Begin;
             }
             catch (Exception ex)
             { Console.WriteLine(ex); }
