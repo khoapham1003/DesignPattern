@@ -419,10 +419,49 @@ namespace DesignPatterns
                                 break;
                             case 4:
                                 #region Mediator
+                                Console.WriteLine("=== Chuẩn bị lớp học ===");
+
+                                var mediator = new Mediator();
+
+                                mediator.SinhVien = new SinhVien(mediator);
+                                mediator.GiaoVien = new GiaoVien(mediator);
+                                mediator.PhongThietBi = new PhongThietBi();
+                                mediator.PhongHoc = new PhongHoc();
+
+                                // Trường hợp: Sinh viên chưa mượn thiết bị
+                                mediator.SinhVien.VaoLop();
+
+                                Console.WriteLine("\n-- Sinh viên mượn remote --\n");
+                                mediator.SinhVien.MuonRemote();
+                                
+
+
                                 #endregion
                                 break;
                             case 5:
                                 #region Memento
+                                QuanLyGiaoDich giaoDich = new QuanLyGiaoDich("GDBD");
+                                QuanLyLichSu quanLyLichSu = new QuanLyLichSu(giaoDich);
+
+                                quanLyLichSu.LuuTru();
+                                giaoDich.XulyGiaoDich();
+
+                                quanLyLichSu.LuuTru();
+                                giaoDich.XulyGiaoDich();
+
+                                quanLyLichSu.LuuTru();
+                                giaoDich.XulyGiaoDich();
+
+                                Console.WriteLine();
+                                quanLyLichSu.XemLichSu();
+
+                                Console.WriteLine("\nKhách hàng: Hãy phục hồi lại giao dịch!\n");
+                                quanLyLichSu.HoanTac();
+
+                                Console.WriteLine("\nKhách hàng: Một lần nữa!\n");
+                                quanLyLichSu.HoanTac();
+
+                                Console.WriteLine();
                                 #endregion
                                 break;
                             case 6:
