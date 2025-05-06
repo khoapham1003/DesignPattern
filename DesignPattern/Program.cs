@@ -51,10 +51,10 @@ namespace DesignPatterns
                         Console.WriteLine("\t3.Visitor");
                         Console.WriteLine("\t4.Mediator");
                         Console.WriteLine("\t5.Memento");
-                        Console.WriteLine("\t6.Observer");
+                        Console.WriteLine("\t6.Interpreter");
                         Console.WriteLine("\t7.Chain of Responsibility");
                         Console.WriteLine("\t8.Strategy");
-                        Console.WriteLine("\t9.Template Method");
+                        Console.WriteLine("\t9.Observer");
                         Console.WriteLine("\t10.Iterator");
                         #endregion
                         break;
@@ -440,7 +440,7 @@ namespace DesignPatterns
                                 break;
                             case 5:
                                 #region Memento
-                                QuanLyGiaoDich giaoDich = new QuanLyGiaoDich("GDBD");
+                                QuanLyGiaoDich giaoDich = new QuanLyGiaoDich("Giao dịch ban đầu");
                                 QuanLyLichSu quanLyLichSu = new QuanLyLichSu(giaoDich);
 
                                 quanLyLichSu.LuuTru();
@@ -465,13 +465,46 @@ namespace DesignPatterns
                                 #endregion
                                 break;
                             case 6:
-                                #region 
+                                #region Interpreter
+                                string input = "100 kWh + 20 m3";
+                                Console.WriteLine($"Tính tiền cho: {input}");
 
+                                var context = new InterpreterContext();
+                                var bieuThuc = DSLInterpreter.Parse(input);
+
+                                decimal tongTien = bieuThuc.Interpret(context);
+                                Console.WriteLine($"=> Tổng tiền phải trả: {tongTien:N0} đ");
                                 #endregion
                                 break;
                             case 7:
-                                #region 
-                                #endregion
+                                #region Chain of Responsibility
+                                var verifier = new Verifier();
+                                var robot = new AutoResponder();
+                                var operatorHandler = new CallCenterOperator();
+                                var linux = new LinuxEngineer();
+                                var windows = new WindowsEngineer();
+
+                                verifier.SetNext(robot)
+                                        .SetNext(operatorHandler)
+                                        .SetNext(linux)
+                                        .SetNext(windows);
+
+                                var requests = new List<SupportRequest>
+        {
+            new SupportRequest("KH001", "Linux", "Thiết bị mới không nhận"),
+            new SupportRequest("KH002", "Windows", "Thiết bị không nhận"),
+            new SupportRequest("KH003", "Linux", "Không khởi động được"),
+            new SupportRequest("KHVIP", "Windows", "Không nhận driver"),
+            new SupportRequest("INVALID", "Linux", "Không thấy gì hết")
+        };
+
+                                foreach (var req in requests)
+                                {
+                                    Console.WriteLine(new string('-', 50));
+                                    Client.GoiHoTro(verifier, req);
+                                    Console.ReadLine();
+                                }
+                                #endregion  
                                 break;
                             default:
                                 goto LoopPattern;

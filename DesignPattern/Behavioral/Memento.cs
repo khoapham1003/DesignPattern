@@ -18,7 +18,7 @@
 
         private string TaoChuoiNgauNhien(int doDai = 10)
         {
-            string kyTuDuocPhep = "abcdeABCDE";
+            string kyTuDuocPhep = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string ketQua = string.Empty;
 
             while (doDai > 0)
