@@ -506,6 +506,57 @@ namespace DesignPatterns
                                 }
                                 #endregion  
                                 break;
+                            case 8:
+                            case 9:
+                                #region Observer
+                                var order = new Order("BOOK123");
+
+                                var warehouse = new WarehouseDepartment();
+                                var shipping = new ShippingDepartment();
+                                var customer = new CustomerNotification();
+
+                                order.Attach(warehouse);
+                                order.Attach(shipping);
+                                order.Attach(customer);
+
+                                order.ChangeStatus(OrderStatus.Processing);
+                                order.ChangeStatus(OrderStatus.Shipped);
+                                order.ChangeStatus(OrderStatus.Delivered);
+
+                                order.Detach(shipping);
+
+                                order.ChangeStatus(OrderStatus.Cancelled);
+                                #endregion
+                                break;
+                            case 10:
+                                #region Iterator
+                                var records = new PatientRecordCollection();
+                                records.AddRecord(new PatientRecord("Nguyen Van A", new DateTime(2024, 12, 10), 2));
+                                records.AddRecord(new PatientRecord("Tran Thi B", new DateTime(2025, 01, 5), 1));
+                                records.AddRecord(new PatientRecord("Le Van C", new DateTime(2025, 02, 15), 3));
+
+                                Console.WriteLine("Duyệt theo ngày tạo:");
+                                records.SetTraversalMode(PatientRecordCollection.TraversalMode.ByDate);
+                                foreach (PatientRecord record in records)
+                                {
+                                    Console.WriteLine(record);
+                                }
+
+                                Console.WriteLine("\nDuyệt ngược theo ngày tạo:");
+                                records.SetTraversalMode(PatientRecordCollection.TraversalMode.ByDateReverse);
+                                foreach (PatientRecord record in records)
+                                {
+                                    Console.WriteLine(record);
+                                }
+
+                                Console.WriteLine("\nDuyệt theo mức độ ưu tiên:");
+                                records.SetTraversalMode(PatientRecordCollection.TraversalMode.ByPriority);
+                                foreach (PatientRecord record in records)
+                                {
+                                    Console.WriteLine(record);
+                                }
+                                #endregion
+                                break;
                             default:
                                 goto LoopPattern;
                         }
