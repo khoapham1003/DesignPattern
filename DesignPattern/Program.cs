@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DesignPatterns.Strategy;
+using ScientificTemplateMethodDemo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +58,7 @@ namespace DesignPatterns
                         Console.WriteLine("\t8.Strategy");
                         Console.WriteLine("\t9.Observer");
                         Console.WriteLine("\t10.Iterator");
+                        Console.WriteLine("\t11.Template Method");
                         #endregion
                         break;
                     default:
@@ -507,6 +510,22 @@ namespace DesignPatterns
                                 #endregion  
                                 break;
                             case 8:
+                                #region Strategy
+                                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+                                var items = new List<string> { "d", "a", "e", "c", "b" };
+
+                                var sortContext = new SortContext(new AscendingSortStrategy());
+                                Console.WriteLine("Sắp xếp tăng dần:");
+                                sortContext.ExecuteStrategy(new List<string>(items));
+
+                                Console.WriteLine();
+
+                                sortContext.SetStrategy(new DescendingSortStrategy());
+                                Console.WriteLine("Sắp xếp giảm dần:");
+                                sortContext.ExecuteStrategy(new List<string>(items));
+                                #endregion
+                                break;
                             case 9:
                                 #region Observer
                                 var order = new Order("BOOK123");
@@ -556,6 +575,22 @@ namespace DesignPatterns
                                     Console.WriteLine(record);
                                 }
                                 #endregion
+                                break;
+                            case 11:
+                                #region Template Method
+                                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+                                Console.WriteLine("Phân tích mẫu DNA:\n");
+                                Console.ReadLine();
+                                Scientist.ProcessSample(new DNASampleAnalyzer());
+                                Console.ReadLine();
+
+                                Console.WriteLine("\n=====================\n");
+
+                                Console.WriteLine("Phân tích mẫu nước:\n");
+                                Console.ReadLine();
+                                Scientist.ProcessSample(new WaterSampleAnalyzer());
+                                #endregion 
                                 break;
                             default:
                                 goto LoopPattern;
