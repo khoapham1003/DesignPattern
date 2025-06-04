@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PizzaFactory;
 
 namespace DesignPatterns
 {
@@ -83,12 +84,33 @@ namespace DesignPatterns
                                 break;
                             case 2:
                                 #region Factory Method
-
+                                PizzaType type = PizzaType.Seafood;
+                                IPizza pizza;
+                                if (type == PizzaType.Seafood)
+                                    pizza = new SeafoodPizza();
+                                else if (type == PizzaType.Deluxe)
+                                {
+                                    pizza = new DeluxePizza();
+                                }
+                                else
+                                {
+                                    pizza = new HamAndMushroomPizza();
+                                }
+                                Console.WriteLine(pizza.GetPrice().ToString());
                                 #endregion
                                 break;
                             case 3:
                                 #region Abstract Factory
-
+                                MonAnFactory loaiNac = new LoaiNacFactory();
+                                Client_FactoryMethod NacClient = new Client_FactoryMethod(loaiNac);
+                                MonAnFactory loaiGio = new LoaiGioFactory();
+                                Client_FactoryMethod GioClient = new Client_FactoryMethod(loaiGio);
+                                Console.WriteLine("********* HỦ TIẾU *********");
+                                Console.WriteLine(NacClient.GetHuTieuDetails());
+                                Console.WriteLine(GioClient.GetHuTieuDetails());
+                                Console.WriteLine("********* MỲ *********");
+                                Console.WriteLine(NacClient.GetMyDetails()); Console.WriteLine(GioClient.GetMyDetails());
+                                Console.ReadKey();
                                 #endregion
                                 break;
                             case 4:
