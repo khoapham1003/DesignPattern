@@ -170,7 +170,6 @@ namespace DesignPatterns
                                 Console.WriteLine("   nguoi3:");
                                 HienThiThongTin.HienThiThongTinNguoiDung(nguoi3);
 
-                                Console.ReadLine();
                                 // Thay đổi thuộc tính của nguoi1
                                 nguoi1.Tuoi = 32;
                                 nguoi1.NgaySinh = Convert.ToDateTime("1990-01-01");
@@ -283,7 +282,6 @@ namespace DesignPatterns
                                 Console.WriteLine("***Bridge");
                                 ClientBridge clientBridge = new ClientBridge();
                                 clientBridge.MoApp();
-                                Console.ReadLine();
                                 #endregion
                                 break;
                             case 5:
@@ -310,7 +308,6 @@ namespace DesignPatterns
                                 context5.Operation();
 
                                 factory.ListFlyweights();
-                                Console.ReadLine();
 
                                 #endregion
                                 break;
@@ -346,73 +343,58 @@ namespace DesignPatterns
                                 goto LoopGroup;
                             case 1:
                                 #region State
+
                                 // Đơn suôn sẻ
                                 Console.WriteLine("Đơn hàng 1:");
                                 var contextOrder1 = new OrderContext(new PendingState());
-                                Console.ReadLine();
                                 contextOrder1.ProcessOrder();
-                                Console.ReadLine();
                                 contextOrder1.ShipOrder();
-                                Console.ReadLine();
                                 contextOrder1.DeliverOrder();
-                                Console.ReadLine();
                                 contextOrder1.CompleteOrder();
-                                Console.ReadLine();
                                 contextOrder1.CancelOrder();
-                                Console.ReadLine();
 
                                 // Đơn bị hủy khi đang process
                                 Console.WriteLine("Đơn hàng 2:");
                                 var contextOrder2 = new OrderContext(new PendingState());
-                                Console.ReadLine();
                                 contextOrder2.ProcessOrder();
-                                Console.ReadLine();
                                 contextOrder2.CancelOrder();
-                                Console.ReadLine();
 
                                 // Đơn hàng chưa được xử lý nhưng thử giao
                                 Console.WriteLine("Đơn hàng 3:");
                                 var contextOrder3 = new OrderContext(new PendingState());
-                                Console.ReadLine();
                                 contextOrder3.ShipOrder();
-                                Console.ReadLine();
                                 contextOrder3.ProcessOrder();
-                                Console.ReadLine();
                                 contextOrder3.ShipOrder();
-                                Console.ReadLine();
                                 contextOrder3.DeliverOrder();
-                                Console.ReadLine();
                                 contextOrder3.CompleteOrder();
-                                Console.ReadLine();
+
+
                                 #endregion
                                 break;
                             case 2:
                                 #region Command
+
                                 var accK = new Account("Khoa", 1900);
                                 var accT = new Account("Tien", 2000);
 
                                 var bank = new BankSystem();
                                 Console.WriteLine("=== Đăng nhập các kiểu vào tài khoản ===");
 
-                                Console.ReadLine();
                                 var deposit = new DepositCommand(accK, 300);
                                 
                                 bank.SetCommand(deposit);
                                 bank.ExecuteCommand();
 
-                                Console.ReadLine();
                                 var withdrawfail = new WithdrawCommand(accK, 3000);
                                 
                                 bank.SetCommand(withdrawfail);
                                 bank.ExecuteCommand();
 
-                                Console.ReadLine();
                                 var withdrawsuccess = new WithdrawCommand(accK, 1500);
                                 
                                 bank.SetCommand(withdrawsuccess);
                                 bank.ExecuteCommand();
 
-                                Console.ReadLine();
                                 var transfer = new TransferCommand(accK, accT, 300);
                                 
                                 bank.SetCommand(transfer);
@@ -428,15 +410,12 @@ namespace DesignPatterns
                                 var danhSachThietBi = new List<IThietBi>
                                 {new MayIn(),new MayFax()};
                                 
-                                Console.ReadLine();
                                 Console.WriteLine("=== KSPC kiểm tra phần cứng ===");
                                 QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new KySuPhanCung());
 
-                                Console.ReadLine();
                                 Console.WriteLine("\n=== KSPM kiểm tra phần mềm ===");
                                 QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new KySuPhanMem());
 
-                                Console.ReadLine();
                                 Console.WriteLine("\n=== NVVP sử dụng ===");
                                 QuanLyThietBi.ThucHienKiemTra(danhSachThietBi, new NhanVienVanPhong());
 
@@ -444,6 +423,8 @@ namespace DesignPatterns
                                 break;
                             case 4:
                                 #region Mediator
+
+
                                 Console.WriteLine("=== Chuẩn bị lớp học ===");
 
                                 var mediator = new Mediator();
@@ -460,11 +441,11 @@ namespace DesignPatterns
                                 mediator.SinhVien.MuonRemote();
                                 
 
-
                                 #endregion
                                 break;
                             case 5:
                                 #region Memento
+
                                 QuanLyGiaoDich giaoDich = new QuanLyGiaoDich("Giao dịch ban đầu");
                                 QuanLyLichSu quanLyLichSu = new QuanLyLichSu(giaoDich);
 
@@ -486,11 +467,11 @@ namespace DesignPatterns
                                 Console.WriteLine("\nKhách hàng: Một lần nữa!\n");
                                 quanLyLichSu.HoanTac();
 
-                                Console.WriteLine();
                                 #endregion
                                 break;
                             case 6:
                                 #region Interpreter
+
                                 string input = "100 kWh + 20 m3";
                                 Console.WriteLine($"Tính tiền cho: {input}");
 
@@ -499,10 +480,14 @@ namespace DesignPatterns
 
                                 decimal tongTien = bieuThuc.Interpret(context);
                                 Console.WriteLine($"=> Tổng tiền phải trả: {tongTien:N0} đ");
+
+
                                 #endregion
                                 break;
                             case 7:
                                 #region Chain of Responsibility
+
+
                                 var verifier = new Verifier();
                                 var robot = new AutoResponder();
                                 var operatorHandler = new CallCenterOperator();
@@ -527,12 +512,15 @@ namespace DesignPatterns
                                 {
                                     Console.WriteLine(new string('-', 50));
                                     Client.GoiHoTro(verifier, req);
-                                    Console.ReadLine();
                                 }
+
+
+
                                 #endregion  
                                 break;
                             case 8:
                                 #region Strategy
+
                                 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
                                 var items = new List<string> { "d", "a", "e", "c", "b" };
@@ -546,6 +534,8 @@ namespace DesignPatterns
                                 sortContext.SetStrategy(new DescendingSortStrategy());
                                 Console.WriteLine("Sắp xếp giảm dần:");
                                 sortContext.ExecuteStrategy(new List<string>(items));
+
+
                                 #endregion
                                 break;
                             case 9:
@@ -571,6 +561,7 @@ namespace DesignPatterns
                                 break;
                             case 10:
                                 #region Iterator
+
                                 var records = new PatientRecordCollection();
                                 records.AddRecord(new PatientRecord("Nguyen Van A", new DateTime(2024, 12, 10), 2));
                                 records.AddRecord(new PatientRecord("Tran Thi B", new DateTime(2025, 01, 5), 1));
@@ -596,22 +587,23 @@ namespace DesignPatterns
                                 {
                                     Console.WriteLine(record);
                                 }
+
+
                                 #endregion
                                 break;
                             case 11:
                                 #region Template Method
+
                                 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
                                 Console.WriteLine("Phân tích mẫu DNA:\n");
-                                Console.ReadLine();
                                 Scientist.ProcessSample(new DNASampleAnalyzer());
-                                Console.ReadLine();
 
                                 Console.WriteLine("\n=====================\n");
 
                                 Console.WriteLine("Phân tích mẫu nước:\n");
-                                Console.ReadLine();
                                 Scientist.ProcessSample(new WaterSampleAnalyzer());
+
                                 #endregion 
                                 break;
                             default:

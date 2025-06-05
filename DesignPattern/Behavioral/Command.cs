@@ -1,4 +1,6 @@
-﻿//Receiver: Xử lý nghiệp vụ
+﻿
+
+//Receiver: Xử lý nghiệp vụ
 public class Account
 {
     public string Owner { get; }
@@ -9,13 +11,11 @@ public class Account
         Owner = owner;
         Balance = initial;
     }
-
     public void Deposit(decimal amount)
     {
         Balance += amount;
         Console.WriteLine($"{Owner} gửi vào tk {amount}k. Số dư mới: {Balance}k");
     }
-
     public void Withdraw(decimal amount)
     {
         if (amount > Balance)
@@ -51,7 +51,7 @@ public interface ITransaction
     void Execute();
 }
 
-//Concrete Commands
+//Concrete Commands: Nạp tiền
 public class DepositCommand : ITransaction
 {
     private readonly Account _receiver;
@@ -69,6 +69,8 @@ public class DepositCommand : ITransaction
     }
 }
 
+
+//Concrete Commands: Rút tiền
 public class WithdrawCommand : ITransaction
 {
     private readonly Account _receiver;
@@ -86,6 +88,7 @@ public class WithdrawCommand : ITransaction
     }
 }
 
+//Concrete Commands: Chuyển tiền
 public class TransferCommand : ITransaction
 {
     private readonly Account _from;

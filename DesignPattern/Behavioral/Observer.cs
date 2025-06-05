@@ -1,4 +1,6 @@
-﻿public interface IObserver
+﻿
+
+public interface IObserver
 {
     void Update(Order order);
 }
@@ -33,19 +35,16 @@ public class Order : IOrderSubject
         OrderId = orderId;
         Status = OrderStatus.Created;
     }
-
     public void Attach(IObserver observer)
     {
         Console.WriteLine($"[Order {OrderId}] Gắn Observer: {observer.GetType().Name}");
         _observers.Add(observer);
     }
-
     public void Detach(IObserver observer)
     {
         _observers.Remove(observer);
         Console.WriteLine($"[Order {OrderId}] Gỡ Observer: {observer.GetType().Name}");
     }
-
     public void Notify()
     {
         Console.WriteLine($"\n[Order {OrderId}] Trạng thái mới: {Status} => Gửi thông báo cho các bộ phận:");
@@ -54,7 +53,6 @@ public class Order : IOrderSubject
             observer.Update(this);
         }
     }
-
     // Hàm thay đổi trạng thái đơn hàng
     public void ChangeStatus(OrderStatus newStatus)
     {

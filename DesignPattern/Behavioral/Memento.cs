@@ -1,4 +1,5 @@
-﻿    class QuanLyGiaoDich
+﻿
+    class QuanLyGiaoDich
     {
         private string _state;
 
@@ -7,6 +8,7 @@
             this._state = trangThai;
             Console.WriteLine("QuanLyGiaoDich: Trạng thái ban đầu của giao dịch là: " + trangThai);
         }
+
 
         // Chức năng xử lý giao dịch có thể làm thay đổi trạng thái của nó
         public void XulyGiaoDich()
@@ -95,32 +97,26 @@
     class QuanLyLichSu
     {
         private List<ITransactionMemento> _mementos = new List<ITransactionMemento>();
-
         private QuanLyGiaoDich _quanLyGiaoDich;
 
         public QuanLyLichSu(QuanLyGiaoDich quanLyGiaoDich)
         {
             this._quanLyGiaoDich = quanLyGiaoDich;
         }
-
         public void LuuTru()
         {
             Console.WriteLine("\nQuanLyLichSu: Đang lưu lại trạng thái giao dịch...");
             this._mementos.Add(this._quanLyGiaoDich.LuuLai());
         }
-
         public void HoanTac()
         {
             if (this._mementos.Count == 0)
             {
                 return;
             }
-
             var memento = this._mementos.Last();
             this._mementos.Remove(memento);
-
             Console.WriteLine("QuanLyLichSu: Đang phục hồi trạng thái giao dịch từ: " + memento.LayTen());
-
             try
             {
                 this._quanLyGiaoDich.PhucHoi(memento);
@@ -130,7 +126,6 @@
                 this.HoanTac();
             }
         }
-
         public void XemLichSu()
         {
             Console.WriteLine("QuanLyLichSu: Danh sách các giao dịch đã lưu:");

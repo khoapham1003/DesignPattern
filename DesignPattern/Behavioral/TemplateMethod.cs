@@ -2,7 +2,7 @@
 
 namespace ScientificTemplateMethodDemo
 {
-    // Lớp trừu tượng: định nghĩa khuôn mẫu cho quy trình phân tích mẫu thí nghiệm
+    // AbstractClass: định nghĩa khuôn mẫu cho quy trình phân tích mẫu thí nghiệm
     abstract class LabSampleAnalyzer
     {
         public void AnalyzeSample()
@@ -41,7 +41,7 @@ namespace ScientificTemplateMethodDemo
         protected virtual void OptionalHook2() { }
     }
 
-    // Lớp cụ thể: Phân tích mẫu DNA
+    // ConcreteClass 1: Phân tích mẫu DNA
     class DNASampleAnalyzer : LabSampleAnalyzer
     {
         protected override void PrepareSample()
@@ -55,7 +55,7 @@ namespace ScientificTemplateMethodDemo
         }
     }
 
-    // Lớp cụ thể: Phân tích mẫu nước
+    // ConcreteClass 2: Phân tích mẫu nước
     class WaterSampleAnalyzer : LabSampleAnalyzer
     {
         protected override void PrepareSample()

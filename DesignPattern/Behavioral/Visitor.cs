@@ -1,4 +1,7 @@
-﻿// Interface Element: Thiết bị
+﻿
+
+
+// Interface Element: Thiết bị
 public interface IThietBi
 {
     string Ten { get; }
@@ -52,7 +55,6 @@ public class KySuPhanCung : IKiemTra
             $"{(mayIn.CoGiay ? "Còn giấy" : "Hết giấy")}, " +
             $"{(mayIn.CoKetNoiMang ? "Kết nối mạng OK" : "Mất kết nối")}");
     }
-
     public void KiemTraMayFax(MayFax fax)
     {
         Console.WriteLine(
@@ -61,7 +63,6 @@ public class KySuPhanCung : IKiemTra
             $"{(fax.CoDuongTruyenTot ? "Đường truyền ổn" : "Lỗi đường truyền")}");
     }
 }
-
 // Concrete Visitor: Kỹ sư kiểm tra phần mềm
 public class KySuPhanMem : IKiemTra
 {
@@ -69,13 +70,11 @@ public class KySuPhanMem : IKiemTra
     {
         Console.WriteLine($"[Phần mềm] {mayIn.Ten}: Đang dùng {mayIn.PhanMem} – Phân tích log OK.");
     }
-
     public void KiemTraMayFax(MayFax fax)
     {
         Console.WriteLine($"[Phần mềm] {fax.Ten}: Hệ điều hành {fax.PhanMem} – Không phát hiện lỗi.");
     }
 }
-
 // Concrete Visitor: Nhân viên văn phòng (người sử dụng thiết bị)
 public class NhanVienVanPhong : IKiemTra
 {
@@ -83,7 +82,6 @@ public class NhanVienVanPhong : IKiemTra
     {
         Console.WriteLine($"[Người dùng] {mayIn.Ten}: {mayIn.InThu()}");
     }
-
     public void KiemTraMayFax(MayFax fax)
     {
         Console.WriteLine($"[Người dùng] {fax.Ten}: {fax.GuiFaxThu()}");

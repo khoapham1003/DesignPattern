@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DesignPatterns.Strategy
 {
+
     // Interface định nghĩa thuật toán (Strategy)
     public interface ISortStrategy
     {

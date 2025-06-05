@@ -1,4 +1,7 @@
-﻿// Iterator Interface
+﻿
+
+
+// Iterator Interface
 using System.Collections;
 
 abstract class Iterator : IEnumerator
@@ -92,7 +95,7 @@ class PatientRecordCollection : IteratorAggregate
                 sorted = _records.OrderByDescending(r => r.CreatedDate).ToList();
                 break;
             case TraversalMode.ByPriority:
-                sorted = _records.OrderBy(r => r.PriorityLevel).ToList(); // Lower = higher priority
+                sorted = _records.OrderBy(r => r.PriorityLevel).ToList(); 
                 break;
             default:
                 sorted = _records.OrderBy(r => r.CreatedDate).ToList();

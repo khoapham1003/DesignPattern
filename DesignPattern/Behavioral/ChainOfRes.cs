@@ -1,4 +1,6 @@
-﻿public class SupportRequest
+﻿
+
+public class SupportRequest
 {
     public string CustomerId { get; set; }
     public string OS { get; set; }
